@@ -1,7 +1,8 @@
 #！/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import re
-#CLASSIC MULTIVARIABLE LINEAR REGRESSION FORM: y = f(X) = W*X + b
+import fn
+#CLASSIC MULTIVARIATE LINEAR REGRESSION FORM: y = f(X) = W*X + b
 #CAPITAL LETTER denotes vector, lowercase letter denotes scalar
 X, y = [], []
 Xy = [] #an m × n augmented matrix [X|y]
@@ -49,4 +50,12 @@ for i, val in enumerate(W):
     print("w_%d = %.4f" % (i+1, val))
 print("b = %.4f" % b)
 print("The minimized squared sum = %.4f" % distSum)
+
+#可决定系数(Coefficient of determination)计算
+ySum = 0
+for i in range(m):
+    ySum += y[i]
+y_avg = ySum / m
+
+y_fit = pass
 #Author: Zhiming Shi

@@ -1,26 +1,16 @@
 #！/usr/bin/env python3
 # -*- coding: utf-8 -*-
 import re
-import fn
+import numpy as np
 #CLASSIC MULTIVARIATE LINEAR REGRESSION FORM: y = f(X) = W*X + b
 #CAPITAL LETTER denotes vector, lowercase letter denotes scalar
-X, y = [], []
-Xy = [] #an m × n augmented matrix [X|y]
-#read training set data from a txt file
-for entry in open("array.txt"):
-    Xy.append(entry.strip())
-for i in range(len(Xy)):
-    Xy[i] = re.split(r'\s+', Xy[i].strip())
-m = len(Xy) #rows of [X|y], i.e. number of entries
-n = len(Xy[0]) #columns of [X|y]
-#break the augmented matrix [X|y] into X and y
-for i in range(m):
-    X.append([])
-    for j in range(n-1):
-        X[i].append(float(Xy[i][j]))
-    y.append(float(Xy[i][-1]))
-W, b = [0]*(n-1), 0 #size of W is dependent on size of X
-#set STEP_SIZE, a.k.a. learning rate
+Xy = np.genfromtxt("sheet.csv", delimiter=",", dtype=float)
+m = len(Xy)    #rows
+n = len(Xy[0]) #columns
+X = Xy[...,:-1] #size of m × n-1 
+y = Xy[....-1]  #size of m × 1
+X1 = np.append(X, np.ones((m,1)), axis=1)
+wb = np.zeros(1,n)
 STEP_SIZE = float(input("Set your learning rate. STEP_SIZE = "))
 #ALGORITHM
 isMin = False
